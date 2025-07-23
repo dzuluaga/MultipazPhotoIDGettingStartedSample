@@ -125,14 +125,22 @@ fun App(promptModel: PromptModel) {
 
                 // 2. Generate IACA Certificate
                 val iacaKey = Crypto.createEcPrivateKey(EcCurve.P256)
-                val iacaCert = MdocUtil.generateIacaCertificate(
-                    iacaKey = iacaKey,
-                    subject = X500Name.fromName(name = "CN=Test IACA Key"),
-                    serial = ASN1Integer.fromRandom(numBits = 128),
-                    validFrom = validFrom,
-                    validUntil = validUntil,
-                    issuerAltNameUrl = "https://issuer.example.com",
-                    crlUrl = "https://issuer.example.com/crl"
+                val iacaCert = X509Cert.fromPem(
+                    """
+                        -----BEGIN CERTIFICATE-----
+                        MIICZDCCAemgAwIBAgIQ+NBW8+WP8e2c4/wnqmyywzAKBggqhkjOPQQDAzAuMQswCQYDVQQGDAJV
+                        UzEfMB0GA1UEAwwWT1dGIE11bHRpcGF6IFRFU1QgSUFDQTAeFw0yNTA3MjMwNTUzNDRaFw0zMDA3
+                        MjMwNTUzNDRaMC4xCzAJBgNVBAYMAlVTMR8wHQYDVQQDDBZPV0YgTXVsdGlwYXogVEVTVCBJQUNB
+                        MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEAHbz7/IxXtIS7b0KILAa3ul6FHbXmZzZrIytukNKaFZ1
+                        lCu8d2Pg1gysnoHRoYuompaifw5lqP9BDNajGOTcTuZIq5K9BAQKJzrrtj0tsFO6LOOHR2IOs7bA
+                        cIN9KQ3Vo4HLMIHIMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMC0GA1UdEgQm
+                        MCSGImh0dHBzOi8vaXNzdWVyLmV4YW1wbGUuY29tL3dlYnNpdGUwMwYDVR0fBCwwKjAooCagJIYi
+                        aHR0cHM6Ly9pc3N1ZXIuZXhhbXBsZS5jb20vY3JsLmNybDAdBgNVHQ4EFgQUBE7IHeNuw2JjaSRD
+                        qoywl2HkVokwHwYDVR0jBBgwFoAUBE7IHeNuw2JjaSRDqoywl2HkVokwCgYIKoZIzj0EAwMDaQAw
+                        ZgIxAM4OydScN5KcUlrj6YLXAvCnQ4vv5fW1PqlcgH35cq7PElqMrRXlFFpfAwhEj50LjwIxAMfX
+                        EN8aZaMawjzmxiTv5hRVZMud/XjBDjCe50EMiYxKfWKdzfBkqhCkVrGdtGmUDg==
+                        -----END CERTIFICATE-----
+                    """.trimIndent()
                 )
 
                 // 3. Generate Document Signing (DS) Certificate

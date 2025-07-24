@@ -90,6 +90,9 @@ fun App(promptModel: PromptModel) {
         PromptDialogs(promptModel)
         // ... rest of your UI
 
+        // to track the initialization
+        val isInitialized = remember { mutableStateOf(false) }
+
         LaunchedEffect(null) {
 
             // Storage
@@ -209,6 +212,8 @@ fun App(promptModel: PromptModel) {
                 preferSignatureToKeyAgreement = true,
                 domainMdocSignature = "mdoc",
             )
+
+            isInitialized.value = true
         }
 
         val blePermissionState = rememberBluetoothPermissionState()
@@ -231,7 +236,7 @@ fun App(promptModel: PromptModel) {
                 ) {
                     Text("Request BLE permissions")
                 }
-            } else {
+            } else if (isInitialized.value) {
                 val deviceEngagement = remember { mutableStateOf<ByteString?>(null) }
                 val state = presentmentModel.state.collectAsState()
                 when (state.value) {
@@ -260,6 +265,9 @@ fun App(promptModel: PromptModel) {
                         )
                     }
                 }
+            } else {
+                // Show loading state while initializing
+                Text("Initializing...")
             }
         }
     }

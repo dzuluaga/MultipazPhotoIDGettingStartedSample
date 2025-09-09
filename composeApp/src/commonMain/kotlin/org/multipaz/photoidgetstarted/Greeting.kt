@@ -1,4 +1,4 @@
-package org.multipaz.get_started
+package org.multipaz.photoidgetstarted
 
 class Greeting {
     private val platform = getPlatform()

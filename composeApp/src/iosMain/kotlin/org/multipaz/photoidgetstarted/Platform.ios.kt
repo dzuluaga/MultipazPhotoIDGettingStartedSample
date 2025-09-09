@@ -1,4 +1,4 @@
-package org.multipaz.get_started
+package org.multipaz.photoidgetstarted
 
 import platform.UIKit.UIDevice
 

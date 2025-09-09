@@ -1,8 +1,9 @@
-package org.multipaz.get_started
+package org.multipaz.photoidgetstarted
 
 import androidx.compose.ui.window.ComposeUIViewController
-import org.multipaz.prompt.IosPromptModel
+
+private val app = App.getInstance()
 
 fun MainViewController() = ComposeUIViewController {
-    App(IosPromptModel())
+    app.Content()
 }

@@ -1,4 +1,4 @@
-rootProject.name = "MultipazGettingStartedSample"
+rootProject.name = "MultipazPhotoIDGettingStartedSample"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
